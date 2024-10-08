@@ -4,7 +4,7 @@ from time import sleep
 from cvzone.ColorModule import ColorFinder
 import cvzone
 
-port = 'COM3'
+port = 'COM7'
 pinH = 8
 pinV = 7
 board = Arduino(port)
@@ -20,8 +20,9 @@ def rotateServo(pin,angle):
     board.digital[pin].write(angle)
     sleep(0.015)
 
-video = cv2.VideoCapture(0)
+video = cv2.VideoCapture(1)
 
+quadroCentro = 70
 positionX = 50
 positionY = 70
 
@@ -51,26 +52,22 @@ while True:
         cv2.rectangle(imgShow, (ctX-70, ctY-70), (ctX + 70, ctY + 70), (255, 0, 255), 5)
 
         ##movimento eixo X
-        if cx < (ctX-70):
+        if cx < (ctX-quadroCentro):
             positionX +=1
-            print("X+: ",positionX,cx,(ctX-40))
             if positionX <= 180 and positionX >= 1:
                 rotateServo(pinH, positionX)
-        elif cx > (ctX+70):
+        elif cx > (ctX+quadroCentro):
             positionX -=1
-            print("X-: ", positionX,cx, (ctX+40))
             if positionX <= 180 and positionX >= 1:
                 rotateServo(pinH, positionX)
 
         #movimento eixo Y
-        if cy > (ctY+60):
+        if cy > (ctY+quadroCentro):
             positionY +=1
-            print("Y+: ", positionY,cy, ctY)
             if positionY <=180 and positionY>=1:
                 rotateServo(pinV, positionY)
-        elif cy < (ctY-60):
+        elif cy < (ctY-quadroCentro):
             positionY -=1
-            print("Y-: ", positionY,cy, ctY)
             if positionY <= 180 and positionY >= 1:
                 rotateServo(pinV, positionY)
 
