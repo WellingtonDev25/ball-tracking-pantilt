@@ -14,7 +14,6 @@ board.digital[pinV].mode = SERVO
 
 myColorFinder = ColorFinder(False)
 hsvValues = {'hmin': 0, 'smin': 10, 'vmin': 255, 'hmax': 59, 'smax': 255, 'vmax': 255}
-# hsvValues = {'hmin': 3, 'smin': 25, 'vmin': 211, 'hmax': 26, 'smax': 255, 'vmax': 255}
 
 def rotateServo(pin,angle):
     board.digital[pin].write(angle)
@@ -23,6 +22,7 @@ def rotateServo(pin,angle):
 video = cv2.VideoCapture(1)
 
 quadroCentro = 70
+
 positionX = 50
 positionY = 70
 
